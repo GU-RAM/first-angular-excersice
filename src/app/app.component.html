@@ -1,6 +1,6 @@
 <div class="container">
   <div class="row gap-3 mb-5">
-    <div class="row gap-2 col-5">
+    <section class="row gap-4 col-5">
       <div class="col-4 p-0">
         <input
           class="form-control task-name-input"
@@ -27,24 +27,22 @@
         </select>
       </div>
 
-      <button type="submit" class="btn btn-primary col-2" (click)="addTodo()">
-        add
-      </button>
-    </div>
+      <button class="btn btn-primary col-2" (click)="addTodo()">add</button>
+    </section>
 
-    <section class="todo-board-container row gap-3">
+    <section class="todo-board-container row gap-3 align-items-start">
       <div class="col todo-board-wrapper">
         <div class="todo-board-header">
           <i class="fa-regular fa-rectangle-list"></i>To-do
         </div>
         <p class="todo-board-empty">List is</p>
-        <ul *ngIf="show">
+        <ul *ngIf="todos.length">
           <li
             class="todo-board-list row"
-            *ngFor="let todo of todos; let number = index"
+            *ngFor="let todo of todos; let i = index"
           >
             <div class="todo-board-list-text col-7">
-              <p>{{ number + 1 }}.{{ todo.todo }}</p>
+              <p>{{ i + 1 }}.{{ todo.todo }}</p>
               <button [ngClass]="todo.difficulty | lowercase">
                 {{ todo.difficulty }}
               </button>
@@ -52,12 +50,12 @@
 
             <div class="todo-board-list-buttons col-5 d-flex flex-row">
               <button
-                type="submit"
                 class="btn btn-primary col-2 ms-auto ms-auto"
+                (click)="addInProgress(i)"
               >
                 <i class="fa-solid fa-greater-than"></i>
               </button>
-              <button type="submit" class="btn btn-danger col-2">
+              <button class="btn btn-danger col-2" (click)="deleTodo(i)">
                 <i class="fa-regular fa-square"></i>
               </button>
             </div>
@@ -70,17 +68,25 @@
           <i class="fa-regular fa-rectangle-list"></i>In Progress
         </div>
         <p class="todo-board-empty">List is</p>
-        <ul *ngIf="show">
-          <li class="todo-board-list row" *ngFor="let todos of todos">
+        <ul *ngIf="inProgress.length">
+          <li
+            class="todo-board-list row"
+            *ngFor="let inProgress of inProgress; let i = index"
+          >
             <div class="todo-board-list-text col-7">
-              <p></p>
-              <button class=""></button>
+              <p>{{ i + 1 }}.{{ inProgress.todo }}</p>
+              <button [ngClass]="inProgress.difficulty | lowercase">
+                {{ inProgress.difficulty }}
+              </button>
             </div>
             <div class="todo-board-list-buttons col-5 d-flex">
-              <button type="submit" class="btn btn-primary col-2 ms-auto">
+              <button
+                class="btn btn-primary col-2 ms-auto"
+                (click)="backToTodo(i)"
+              >
                 <i class="fa-solid fa-less-than"></i>
               </button>
-              <button type="submit" class="btn btn-success col-2">
+              <button class="btn btn-success col-2" (click)="addDone(i)">
                 <i class="fa-solid fa-greater-than"></i>
               </button>
             </div>
@@ -93,14 +99,22 @@
           Done
         </div>
         <p class="todo-board-empty">List is</p>
-        <ul *ngIf="show">
-          <li class="todo-board-list row" *ngFor="let todos of todos">
+        <ul *ngIf="done.length">
+          <li
+            class="todo-board-list row"
+            *ngFor="let done of done; let i = index"
+          >
             <div class="todo-board-list-text col-7">
-              <p></p>
-              <button class=""></button>
+              <p>{{ i + 1 }} {{ done.todo }}</p>
+              <button [ngClass]="done.difficulty | lowercase">
+                {{ done.difficulty }}
+              </button>
             </div>
             <div class="todo-board-list-buttons col-5 d-flex">
-              <button type="submit" class="btn btn-primary col-2 ms-auto">
+              <button
+                class="btn btn-primary col-2 ms-auto"
+                (click)="backToInProgress(i)"
+              >
                 <i class="fa-solid fa-less-than"></i>
               </button>
             </div>

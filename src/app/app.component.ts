@@ -13,13 +13,15 @@ interface Todo {
 export class AppComponent {
   title = 'todo-list';
 
-  show = true;
+  difficulty: string[] = ['Easy', 'Medium', 'Hard'];
+
   taskName: string = '';
   difficultyChosen: string = '';
 
   todos: Todo[] = [];
+  inProgress: Todo[] = [];
+  done: Todo[] = [];
 
-  difficulty: string[] = ['Easy', 'Medium', 'Hard'];
   addTodo() {
     if (this.taskName && this.difficultyChosen) {
       this.todos.push({
@@ -30,6 +32,24 @@ export class AppComponent {
       this.difficultyChosen = '';
     }
   }
-  inProgress: Todo[] = [];
-  done: Todo[] = [];
+
+  deleTodo(index: number) {
+    this.todos.splice(index, 1);
+  }
+
+  addInProgress(index: number) {
+    this.inProgress.push(...this.todos.splice(index, 1));
+  }
+
+  addDone(index: number) {
+    this.done.push(...this.inProgress.splice(index, 1));
+  }
+
+  backToInProgress(index: number) {
+    this.inProgress.push(...this.done.splice(index, 1));
+  }
+
+  backToTodo(index: number) {
+    this.todos.push(...this.inProgress.splice(index, 1));
+  }
 }
