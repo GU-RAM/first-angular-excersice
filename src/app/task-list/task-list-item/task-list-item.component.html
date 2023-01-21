@@ -1,4 +1,8 @@
-<div>
+<div class="col-4 todo-board-wrapper">
+  <div class="todo-board-header">
+    <i class="fa-regular fa-rectangle-list"></i>To-do
+  </div>
+  <p class="todo-board-empty" *ngIf="!todos.length">List is empty</p>
   <ul *ngIf="todos.length">
     <li class="todo-board-list row" *ngFor="let todo of todos; let i = index">
       <div class="todo-board-list-text col-7">
@@ -23,11 +27,11 @@
   </ul>
 </div>
 
-<div class="col todo-board-wrapper">
+<div class="col-4 todo-board-wrapper">
   <div class="todo-board-header">
     <i class="fa-regular fa-rectangle-list"></i>In Progress
   </div>
-  <p class="todo-board-empty" *ngIf="!inProgress.length">List is</p>
+  <p class="todo-board-empty" *ngIf="!inProgress.length">List is Empty</p>
   <ul *ngIf="inProgress.length">
     <li
       class="todo-board-list row"
@@ -50,12 +54,12 @@
     </li>
   </ul>
 </div>
-<div class="col todo-board-wrapper">
+<div class="col-4 todo-board-wrapper">
   <div class="todo-board-header">
     <i class="fa-regular fa-rectangle-list"></i>
     Done
   </div>
-  <p class="todo-board-empty" *ngIf="!done.length">List is</p>
+  <p class="todo-board-empty" *ngIf="!done.length">List is empty</p>
   <ul *ngIf="done.length">
     <li class="todo-board-list row" *ngFor="let done of done; let i = index">
       <div class="todo-board-list-text col-7">
