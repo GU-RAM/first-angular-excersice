@@ -1,0 +1,25 @@
+<section class="row gap-4 col-5">
+  <div class="col-4 p-0">
+    <input
+      class="form-control task-name-input"
+      type="text"
+      placeholder="task name"
+      aria-label="default input example"
+      [(ngModel)]="taskName"
+    />
+  </div>
+
+  <div class="col-3 p-0">
+    <select
+      class="form-select difficulty-select"
+      aria-label="Default select example"
+      [(ngModel)]="difficultyChosen"
+    >
+      <option *ngFor="let item of difficulty | keyvalue" [value]="item.value">
+        {{ item.value }}
+      </option>
+    </select>
+  </div>
+
+  <button class="btn btn-primary col-2" (click)="addTodo()">add</button>
+</section>

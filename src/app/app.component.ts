@@ -1,8 +1,14 @@
 import { Component } from '@angular/core';
 
-interface Todo {
+export enum Difficulty {
+  Easy = 'Easy',
+  Medium = 'Medium',
+  Hard = 'Hard',
+}
+
+export interface Todo {
   todo: string;
-  difficulty: string;
+  difficulty: Difficulty;
 }
 
 @Component({
@@ -13,43 +19,31 @@ interface Todo {
 export class AppComponent {
   title = 'todo-list';
 
-  difficulty: string[] = ['Easy', 'Medium', 'Hard'];
-
-  taskName: string = '';
-  difficultyChosen: string = '';
-
   todos: Todo[] = [];
   inProgress: Todo[] = [];
   done: Todo[] = [];
 
-  addTodo() {
-    if (this.taskName && this.difficultyChosen) {
-      this.todos.push({
-        todo: this.taskName,
-        difficulty: this.difficultyChosen,
-      });
-      this.taskName = '';
-      this.difficultyChosen = '';
-    }
+  addToDoHandler(todo: Todo) {
+    this.todos.push(todo);
   }
 
-  deleTodo(index: number) {
+  deleTodoHandler(index: number) {
     this.todos.splice(index, 1);
   }
 
-  addInProgress(index: number) {
+  addInProgressHandler(index: number) {
     this.inProgress.push(...this.todos.splice(index, 1));
   }
 
-  addDone(index: number) {
+  addDoneHandler(index: number) {
     this.done.push(...this.inProgress.splice(index, 1));
   }
 
-  backToInProgress(index: number) {
+  backToInProgressHandler(index: number) {
     this.inProgress.push(...this.done.splice(index, 1));
   }
 
-  backToTodo(index: number) {
+  backToTodoHandler(index: number) {
     this.todos.push(...this.inProgress.splice(index, 1));
   }
 }

@@ -1,0 +1,17 @@
+.todo-board {
+  &-wrapper {
+    border: 0.2rem solid #3399ff;
+    border-radius: 0.5px;
+    padding: 0;
+  }
+  &-header {
+    padding: 2rem;
+    background-color: #c39f91;
+    font-size: 2rem;
+
+    i {
+      font-size: 1.6rem;
+      margin-right: 0.5rem;
+    }
+  }
+}

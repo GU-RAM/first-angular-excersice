@@ -1,0 +1,20 @@
+<div class="row gap-3 mb-5">
+  <section class="todo-board-container row gap-3 align-items-start">
+    <div class="col todo-board-wrapper">
+      <div class="todo-board-header">
+        <i class="fa-regular fa-rectangle-list"></i>To-do
+      </div>
+      <p class="todo-board-empty" *ngIf="!todos.length">List is</p>
+      <app-task-list-item
+        [todos]="todos"
+        [inProgress]="inProgress"
+        [done]="done"
+        (delete)="deleTodo($event)"
+        (onAddInProgress)="addInProgress($event)"
+        (onAddDone)="addDone($event)"
+        (onBackToTodo)="backToTodo($event)"
+        (onBackToInProgress)="backToInProgress($event)"
+      ></app-task-list-item>
+    </div>
+  </section>
+</div>
