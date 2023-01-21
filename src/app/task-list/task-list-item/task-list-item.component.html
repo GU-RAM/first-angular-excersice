@@ -1,81 +1,83 @@
-<div class="col-4 todo-board-wrapper">
-  <div class="todo-board-header">
-    <i class="fa-regular fa-rectangle-list"></i>To-do
-  </div>
-  <p class="todo-board-empty" *ngIf="!todos.length">List is empty</p>
-  <ul *ngIf="todos.length">
-    <li class="todo-board-list row" *ngFor="let todo of todos; let i = index">
-      <div class="todo-board-list-text col-7">
-        <p>{{ i + 1 }}.{{ todo.todo }}</p>
-        <button [ngClass]="todo.difficulty | lowercase">
-          {{ todo.difficulty }}
-        </button>
-      </div>
+<section class="todo-board-container row gap-3 align-items-start row">
+  <div class="col todo-board-wrapper">
+    <div class="todo-board-header">
+      <i class="fa-regular fa-rectangle-list"></i>To-do
+    </div>
+    <p class="todo-board-empty" *ngIf="!todos.length">List is empty</p>
+    <ul *ngIf="todos.length">
+      <li class="todo-board-list row" *ngFor="let todo of todos; let i = index">
+        <div class="todo-board-list-text col-7">
+          <p>{{ i + 1 }}.{{ todo.todo }}</p>
+          <button [ngClass]="todo.difficulty | lowercase">
+            {{ todo.difficulty }}
+          </button>
+        </div>
 
-      <div class="todo-board-list-buttons col-5 d-flex flex-row">
-        <button
-          class="btn btn-primary col-2 ms-auto ms-auto"
-          (click)="addInProgress(i)"
-        >
-          <i class="fa-solid fa-greater-than"></i>
-        </button>
-        <button class="btn btn-danger col-2" (click)="deleTodo(i)">
-          <i class="fa-regular fa-square"></i>
-        </button>
-      </div>
-    </li>
-  </ul>
-</div>
+        <div class="todo-board-list-buttons col-5 d-flex flex-row">
+          <button
+            class="btn btn-primary col-2 ms-auto ms-auto"
+            (click)="addInProgress(i)"
+          >
+            <i class="fa-solid fa-greater-than"></i>
+          </button>
+          <button class="btn btn-danger col-2" (click)="deleTodo(i)">
+            <i class="fa-regular fa-square"></i>
+          </button>
+        </div>
+      </li>
+    </ul>
+  </div>
 
-<div class="col-4 todo-board-wrapper">
-  <div class="todo-board-header">
-    <i class="fa-regular fa-rectangle-list"></i>In Progress
+  <div class="col todo-board-wrapper">
+    <div class="todo-board-header">
+      <i class="fa-regular fa-rectangle-list"></i>In Progress
+    </div>
+    <p class="todo-board-empty" *ngIf="!inProgress.length">List is Empty</p>
+    <ul *ngIf="inProgress.length">
+      <li
+        class="todo-board-list row"
+        *ngFor="let inProgress of inProgress; let i = index"
+      >
+        <div class="todo-board-list-text col-7">
+          <p>{{ i + 1 }}.{{ inProgress.todo }}</p>
+          <button [ngClass]="inProgress.difficulty | lowercase">
+            {{ inProgress.difficulty }}
+          </button>
+        </div>
+        <div class="todo-board-list-buttons col-5 d-flex">
+          <button class="btn btn-primary col-2 ms-auto" (click)="backToTodo(i)">
+            <i class="fa-solid fa-less-than"></i>
+          </button>
+          <button class="btn btn-success col-2" (click)="addDone(i)">
+            <i class="fa-solid fa-greater-than"></i>
+          </button>
+        </div>
+      </li>
+    </ul>
   </div>
-  <p class="todo-board-empty" *ngIf="!inProgress.length">List is Empty</p>
-  <ul *ngIf="inProgress.length">
-    <li
-      class="todo-board-list row"
-      *ngFor="let inProgress of inProgress; let i = index"
-    >
-      <div class="todo-board-list-text col-7">
-        <p>{{ i + 1 }}.{{ inProgress.todo }}</p>
-        <button [ngClass]="inProgress.difficulty | lowercase">
-          {{ inProgress.difficulty }}
-        </button>
-      </div>
-      <div class="todo-board-list-buttons col-5 d-flex">
-        <button class="btn btn-primary col-2 ms-auto" (click)="backToTodo(i)">
-          <i class="fa-solid fa-less-than"></i>
-        </button>
-        <button class="btn btn-success col-2" (click)="addDone(i)">
-          <i class="fa-solid fa-greater-than"></i>
-        </button>
-      </div>
-    </li>
-  </ul>
-</div>
-<div class="col-4 todo-board-wrapper">
-  <div class="todo-board-header">
-    <i class="fa-regular fa-rectangle-list"></i>
-    Done
+  <div class="col todo-board-wrapper">
+    <div class="todo-board-header">
+      <i class="fa-regular fa-rectangle-list"></i>
+      Done
+    </div>
+    <p class="todo-board-empty" *ngIf="!done.length">List is empty</p>
+    <ul *ngIf="done.length">
+      <li class="todo-board-list row" *ngFor="let done of done; let i = index">
+        <div class="todo-board-list-text col-7">
+          <p>{{ i + 1 }} {{ done.todo }}</p>
+          <button [ngClass]="done.difficulty | lowercase">
+            {{ done.difficulty }}
+          </button>
+        </div>
+        <div class="todo-board-list-buttons col-5 d-flex">
+          <button
+            class="btn btn-primary col-2 ms-auto"
+            (click)="backToInProgress(i)"
+          >
+            <i class="fa-solid fa-less-than"></i>
+          </button>
+        </div>
+      </li>
+    </ul>
   </div>
-  <p class="todo-board-empty" *ngIf="!done.length">List is empty</p>
-  <ul *ngIf="done.length">
-    <li class="todo-board-list row" *ngFor="let done of done; let i = index">
-      <div class="todo-board-list-text col-7">
-        <p>{{ i + 1 }} {{ done.todo }}</p>
-        <button [ngClass]="done.difficulty | lowercase">
-          {{ done.difficulty }}
-        </button>
-      </div>
-      <div class="todo-board-list-buttons col-5 d-flex">
-        <button
-          class="btn btn-primary col-2 ms-auto"
-          (click)="backToInProgress(i)"
-        >
-          <i class="fa-solid fa-less-than"></i>
-        </button>
-      </div>
-    </li>
-  </ul>
-</div>
+</section>
